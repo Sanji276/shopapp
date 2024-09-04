@@ -5,9 +5,22 @@ import 'package:shopapp/pages/cart_page.dart';
 import 'package:shopapp/pages/home_page.dart';
 import 'package:shopapp/pages/intro_page.dart';
 import 'package:shopapp/pages/shop_page.dart';
+import 'package:shopapp/theme/theme_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ThemeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CartModel(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,17 +28,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (context) => CartModel(),
-        builder: (context, child) => MaterialApp(
-              title: 'Shop App',
-              debugShowCheckedModeBanner: false,
-              home: const IntroPage(),
-              routes: {
-                '/home': (context) => HomePage(),
-                '/shop': (context) => ShopPage(),
-                '/cart': (context) => CartPage(),
-              },
-            ));
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        return MaterialApp(
+          title: 'Shop App',
+          color: Theme.of(context).colorScheme.surface,
+          debugShowCheckedModeBanner: false,
+          home: const IntroPage(),
+          theme: themeProvider.themeData,
+          routes: {
+            '/home': (context) => HomePage(),
+            '/shop': (context) => ShopPage(),
+            '/cart': (context) => CartPage(),
+          },
+        );
+      },
+    );
   }
 }

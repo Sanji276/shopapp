@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopapp/components/bottom_navbar.dart';
 import 'package:shopapp/pages/cart_page.dart';
+import 'package:shopapp/pages/settings_page.dart';
 import 'package:shopapp/pages/shop_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +16,8 @@ class _HomePageState extends State<HomePage> {
     //shop page
     const ShopPage(),
     //cart page
-    const CartPage()
+    const CartPage(),
+    const SettingsPage()
   ];
 
   //
@@ -39,20 +41,20 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         // title: const Text('Home'),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         leading: Builder(builder: (context) {
           return IconButton(
             icon: Icon(Icons.menu),
-            color: Colors.black,
+            color: Theme.of(context).colorScheme.inversePrimary,
             onPressed: () {
               Scaffold.of(context).openDrawer();
             },
           );
         }),
       ),
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Theme.of(context).colorScheme.surface,
       drawer: Drawer(
-        backgroundColor: Colors.black,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -63,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.only(top: 50),
                     child: Image.asset(
                       'lib/images/applogo.png',
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.inversePrimary,
                     )),
                 //divider
                 // const Padding(
@@ -75,13 +77,14 @@ class _HomePageState extends State<HomePage> {
 
                 // other menu
                 ListTile(
-                  leading: const Icon(
+                  leading: Icon(
                     Icons.home,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                   ),
-                  title: const Text(
+                  title: Text(
                     'Home',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.inversePrimary),
                   ),
                   onTap: () {
                     // Navigator.of(context).pop();
@@ -94,12 +97,13 @@ class _HomePageState extends State<HomePage> {
                   height: 10,
                 ),
                 ListTile(
-                  leading: const Icon(
+                  leading: Icon(
                     Icons.shop,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                   ),
-                  title:
-                      const Text('Shop', style: TextStyle(color: Colors.white)),
+                  title: Text('Shop',
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.inversePrimary)),
                   onTap: () {
                     navigateToPage(0);
                   },
@@ -108,27 +112,41 @@ class _HomePageState extends State<HomePage> {
                   height: 10,
                 ),
                 ListTile(
-                  leading: const Icon(
+                  leading: Icon(
                     Icons.shopping_bag_outlined,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                   ),
-                  title:
-                      const Text('Cart', style: TextStyle(color: Colors.white)),
+                  title: Text('Cart',
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.inversePrimary)),
                   onTap: () {
                     // Navigator.of(context).pop();
                     // Navigator.pushNamed(context, '/cart');
                     navigateToPage(1);
                   },
                 ),
+                ListTile(
+                  leading: Icon(
+                    Icons.settings,
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                  title: Text('Settings',
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.inversePrimary)),
+                  onTap: () {
+                    navigateToPage(2);
+                  },
+                )
               ],
             ),
             ListTile(
-              leading: const Icon(
+              leading: Icon(
                 Icons.logout,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.inversePrimary,
               ),
-              title:
-                  const Text('Log out', style: TextStyle(color: Colors.white)),
+              title: Text('Log out',
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.inversePrimary)),
               onTap: () {},
             ),
           ],

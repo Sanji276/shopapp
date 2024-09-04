@@ -17,7 +17,7 @@ class MyBottomNavbar extends StatelessWidget {
           selectedIndex: selectedIndex,
           activeColor: Colors.grey.shade700,
           tabActiveBorder: Border.all(color: Colors.white),
-          tabBackgroundColor: Colors.grey.shade100,
+          tabBackgroundColor: Theme.of(context).colorScheme.surface,
           mainAxisAlignment: MainAxisAlignment.center,
           tabBorderRadius: 15,
           onTabChange: (value) => onTabChange!(value),

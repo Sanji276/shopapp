@@ -58,7 +58,7 @@ class _ShopPageState extends State<ShopPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[100],
+        backgroundColor: Theme.of(context).colorScheme.surface,
         body: Consumer<CartModel>(
           builder: (context, value, child) => Column(
             children: [
@@ -68,7 +68,7 @@ class _ShopPageState extends State<ShopPage> {
                 margin: const EdgeInsets.symmetric(horizontal: 25),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: Colors.white),
+                    color: Theme.of(context).colorScheme.surface),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -76,7 +76,10 @@ class _ShopPageState extends State<ShopPage> {
                       child: TextField(
                         decoration: InputDecoration(
                             hintText: 'search...',
-                            hintStyle: const TextStyle(color: Colors.grey),
+                            hintStyle: TextStyle(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .inversePrimary),
                             filled: true,
                             fillColor: Colors.transparent,
                             border: OutlineInputBorder(
@@ -85,9 +88,10 @@ class _ShopPageState extends State<ShopPage> {
                                   BorderSide.none, // Remove the default border
                             ),
                             prefixIcon: const Icon(Icons.search),
-                            prefixIconColor: Colors.grey),
-                        style: const TextStyle(
-                          color: Colors.grey,
+                            prefixIconColor:
+                                Theme.of(context).colorScheme.inversePrimary),
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.inversePrimary,
                           backgroundColor: Colors
                               .transparent, // Ensure the text field itself is transparent
                         ),

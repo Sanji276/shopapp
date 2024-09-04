@@ -13,8 +13,9 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
+    final cartItems = Provider.of<CartModel>(context).userCart;
     return Scaffold(
-        backgroundColor: Colors.grey[100],
+        backgroundColor: Theme.of(context).colorScheme.surface,
         body: Consumer<CartModel>(
           builder: (context, value, child) => Column(
             children: [
@@ -23,17 +24,19 @@ class _CartPageState extends State<CartPage> {
                 height: 10,
               ),
               Expanded(
-                child: ListView.builder(
-                    itemCount: value.userCart.length,
-                    itemBuilder: (context, index) {
-                      //get individual item from the cart
-                      MobileModel mobile = value.getMobileList()[index];
+                child: cartItems.isEmpty
+                    ? const Center(child: Text('Your cart is empty'))
+                    : ListView.builder(
+                        itemCount: value.userCart.length,
+                        itemBuilder: (context, index) {
+                          //get individual item from the cart
+                          MobileModel mobile = value.getMobileList()[index];
 
-                      //return mobile
-                      return CartItem(
-                        mobile: mobile,
-                      );
-                    }),
+                          //return mobile
+                          return CartItem(
+                            mobile: mobile,
+                          );
+                        }),
               )
             ],
           ),
@@ -58,9 +61,10 @@ class _CartItemState extends State<CartItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
+      margin: const EdgeInsets.only(top: 10),
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(10)),
+          color: Theme.of(context).colorScheme.primary,
+          borderRadius: BorderRadius.circular(10)),
       child: ListTile(
         leading: Image.asset(widget.mobile.imagepath),
         title: Text(widget.mobile.name),

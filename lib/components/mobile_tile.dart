@@ -18,7 +18,8 @@ class MobileTile extends StatelessWidget {
       margin: EdgeInsets.only(top: 25, left: 25, right: doRightMargin ? 25 : 0),
       width: 300,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: Colors.white),
+          borderRadius: BorderRadius.circular(10),
+          color: Theme.of(context).colorScheme.primary),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
